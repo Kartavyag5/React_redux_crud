@@ -165,8 +165,10 @@ const UsersList = () => {
         />
       </div>
       <Modal
-        title='Edit Form'
+        title='Edit User Form'
         open={edit}
+        cancelButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{ style: { display: "none" } }}
         onOk={() => {
           form.resetFields();
           setEdit(false);
@@ -177,7 +179,7 @@ const UsersList = () => {
           setEdit(false);
           setEditUser({});
         }}>
-        <Form
+        {/* <Form
           form={form}
           name='Edit Form'
           labelCol={{
@@ -248,7 +250,80 @@ const UsersList = () => {
               Submit
             </Button>
           </Form.Item>
-        </Form>
+        </Form> */}
+        <form>
+          <div>
+            <div style={{ display: "flex", margin: "10px" }}>
+              <div style={{ marginRight: "10px" }}>First Name :</div>
+              <div>
+                <input
+                  style={{
+                    width: "200px",
+                    height: "25px",
+                    borderRadius: "6px",
+                  }}
+                  type='text'
+                  name='first_name'
+                  value={editUser.first_name}
+                  onChange={(e) => {
+                    setEditUser({ ...editUser, first_name: e.target.value });
+                  }}
+                />
+              </div>
+            </div>
+            <div style={{ display: "flex", margin: "10px" }}>
+              <div style={{ marginRight: "10px" }}>Last Name :</div>
+              <div>
+                <input
+                  style={{
+                    width: "200px",
+                    height: "25px",
+                    borderRadius: "6px",
+                  }}
+                  type='text'
+                  name='last_name'
+                  value={editUser.last_name}
+                  onChange={(e) => {
+                    setEditUser({ ...editUser, last_name: e.target.value });
+                  }}
+                />
+              </div>
+            </div>
+            <div style={{ display: "flex", margin: "10px" }}>
+              <div style={{ marginLeft: "25px", marginRight: "10px" }}>
+                {" "}
+                Avatar :
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    width: "300px",
+                    height: "25px",
+                    borderRadius: "6px",
+                  }}
+                  type='text'
+                  name='avatar'
+                  value={editUser.avatar}
+                  onChange={(e) => {
+                    setEditUser({ ...editUser, avatar: e.target.value });
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <Button
+            style={{ marginLeft: "92px" }}
+            type='primary'
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(updateUser(editUser));
+              setEdit(false);
+            }}>
+            Submit
+          </Button>
+        </form>
       </Modal>
     </>
   );
